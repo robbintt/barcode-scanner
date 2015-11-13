@@ -1,0 +1,8 @@
+-- this command doesn't work in the stock apple version or many older versions
+.open "books.sqlite"
+
+
+-- no constraints. parse uniques later in processing as desired.
+CREATE TABLE "books" (
+    "barcode" varchar(255) DEFAULT NULL
+);

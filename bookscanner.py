@@ -14,6 +14,21 @@ def sqlite_save(barcodes):
     """ Accept a list of barcodes and dump it to an output file.
     """
     output_dir = "data"
+    sqlite_file = "books.sqlite"
+
+    barcode_tuples = [(x,) for x in barcodes]
+
+    db_file = os.path.join(output_dir, sqlite_file)
+
+    conn = sqlite3.connnect(db_file)
+    c = conn.cursor()
+
+    c.executemany("INSERT INTO barcode VALUES (?)", barcode_tuples)
+
+    conn.commit()
+    conn.close()
+    
+    return
 
 
 if __name__ == "__main__":
