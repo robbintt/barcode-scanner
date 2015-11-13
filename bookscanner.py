@@ -116,7 +116,7 @@ if __name__ == "__main__":
         print "Barcode has {} numbers.".format(len(_inputline))
 
         if HYPERSCAN_TOGGLE == False:
-            _accept_inputline = raw_input("Accept barcode? (press enter, any key to discard):")
+            _accept_inputline = raw_input("Accept barcode? (press enter, any nonempty value to discard):")
         else:
             # skip confirmation if hyperscan is on/True
             _accept_inputline = ""
