@@ -1,4 +1,3 @@
-#!/usr/bin/python
 """
 Goal: Dump barcodes.
 """
