@@ -4,6 +4,8 @@ Goal: Dump barcodes.
 """
 import sqlite3
 import os
+import sys
+import time
 
 OUTPUT_DIR = "data"
 SQLITE_FILE = "barcodes.sqlite"
@@ -43,7 +45,7 @@ if __name__ == "__main__":
     print "Please SAVE your work OFTEN, there is no error handling."
     print "   * * *"
 
-    INPUT_STATEMENT = "Type 'quit' to exit.\nType 'save' to save and continue.\nPlease scan the next book:"
+    INPUT_STATEMENT = "Type 'save' to save and continue.\nType 'quit' to exit.\nPlease scan the next book:"
 
 
     barcodes = list()
@@ -60,9 +62,10 @@ if __name__ == "__main__":
         if _inputline == "quit":
             continue
         if _inputline == "save":
-            sqlite_save(barcodes)
             print "   * * *"
-            print "Save successful."
+            print sqlite_save(barcodes)
+            barcodes = list() # start fresh
+            print "There are now {} unsaved barcodes.".format(len(barcodes))
             print "   * * *"
             _inputline = ""
             continue
@@ -77,6 +80,14 @@ if __name__ == "__main__":
             print "Barcode: STORED. There are now {} unsaved barcodes.".format(len(barcodes))
             print "   * * *"
         else:
+            print "\a"
             print "Barcode: DISCARDED DISCARDED DISCARDED."
+            time.sleep(1)
+            print "\a"
+            print "Barcode: DISCARDED DISCARDED DISCARDED."
+            time.sleep(1)
+            print "\a"
+            print "Barcode: DISCARDED DISCARDED DISCARDED."
+            time.sleep(1)
             print "   * * *"
 
