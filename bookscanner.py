@@ -51,7 +51,7 @@ if __name__ == "__main__":
 
     SAVE_STATEMENT = "Type 'save' to save and continue.\n"
     DUMP_STATEMENT = "Type 'dump' to see the barcodes ready to be saved\n"
-    HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode."
+    HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode.\n"
     UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
     INSTRUCTION_STATEMENT = "Please scan the next book:"
