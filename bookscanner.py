@@ -4,9 +4,17 @@ Goal: Dump barcodes.
 
 This script is intentionally bare.
 """
-
+import datetime
+import sqlite3
+import os
 
 INPUT_STATEMENT = "Please scan the next book. Type 'quit' to exit:" 
+
+def sqlite_save(barcodes):
+    """ Accept a list of barcodes and dump it to an output file.
+    """
+    output_dir = "data"
+
 
 if __name__ == "__main__":
     """
@@ -24,6 +32,10 @@ if __name__ == "__main__":
             continue
         # capture 'quit'
         if _inputline == "quit":
+            continue
+        if _inputline == "save":
+            sqlite_save(barcodes)
+            _inputline = ""
             continue
 
         print "   * * *"
