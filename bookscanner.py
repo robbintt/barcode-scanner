@@ -1,26 +1,28 @@
 #!/usr/bin/python
 """
 Goal: Dump barcodes.
-
-This script is intentionally bare.
 """
-import datetime
 import sqlite3
 import os
 
-INPUT_STATEMENT = "Please scan the next book. Type 'quit' to exit:" 
+OUTPUT_DIR = "data"
+SQLITE_FILE = "barcodes.sqlite"
 
 def sqlite_save(barcodes):
     """ Accept a list of barcodes and dump it to an output file.
     """
-    output_dir = "data"
-    sqlite_file = "books.sqlite"
+
+    # quick and dirty edge case
+    if not len(barcodes):
+        # skip this if there are no barcodes
+        return "No data to save... continue..."
+
 
     barcode_tuples = [(x,) for x in barcodes]
 
-    db_file = os.path.join(output_dir, sqlite_file)
+    db_file = os.path.join(OUTPUT_DIR, SQLITE_FILE)
 
-    conn = sqlite3.connnect(db_file)
+    conn = sqlite3.connect(db_file)
     c = conn.cursor()
 
     c.executemany("INSERT INTO barcode VALUES (?)", barcode_tuples)
@@ -28,13 +30,21 @@ def sqlite_save(barcodes):
     conn.commit()
     conn.close()
     
-    return
+    return "Save seemed successful."
 
 
 if __name__ == "__main__":
+    """Save barcodes in to sqlite.
+
+    Goal of this module is to provide some good UX doing this.
     """
-    Dump barcodes in to sqlite.
-    """
+
+    print "   * * *"
+    print "Please SAVE your work OFTEN, there is no error handling."
+    print "   * * *"
+
+    INPUT_STATEMENT = "Type 'quit' to exit.\nType 'save' to save and continue.\nPlease scan the next book:"
+
 
     barcodes = list()
     _inputline = "" # sentinel value (no do while in python)
@@ -44,12 +54,16 @@ if __name__ == "__main__":
 
         # capture empty values, for good UX
         if _inputline == "":
+            print "   * * *"
             continue
         # capture 'quit'
         if _inputline == "quit":
             continue
         if _inputline == "save":
             sqlite_save(barcodes)
+            print "   * * *"
+            print "Save successful."
+            print "   * * *"
             _inputline = ""
             continue
 
@@ -57,12 +71,12 @@ if __name__ == "__main__":
         print "   * * *"
         print "Barcode has {} numbers.".format(len(_inputline))
 
-        _accept_inputline = raw_input("Accept barcode? (y):")
-        if _accept_inputline.lower() == "y":
+        _accept_inputline = raw_input("Accept barcode? (press enter, any key to discard):")
+        if _accept_inputline.lower() == "":
             barcodes.append(_inputline)
-            print "Success. There are now {} barcodes unsaved.".format(len(barcodes))
+            print "Barcode: STORED. There are now {} unsaved barcodes.".format(len(barcodes))
             print "   * * *"
         else:
-            print "This barcode has been discarded."
+            print "Barcode: DISCARDED DISCARDED DISCARDED."
             print "   * * *"
 
