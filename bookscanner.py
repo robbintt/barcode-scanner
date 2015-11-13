@@ -10,6 +10,9 @@ import time
 OUTPUT_DIR = "data"
 SQLITE_FILE = "barcodes.sqlite"
 
+# toggle this in-console, not here. hyperscan turns off barcode confirmations.
+HYPERSCAN_TOGGLE = False
+
 def sqlite_save(barcodes):
     """ Accept a list of barcodes and dump it to an output file.
     """
@@ -58,6 +61,33 @@ if __name__ == "__main__":
         if _inputline == "":
             print "   * * *"
             continue
+
+        HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode."
+        if _inputline == "hyperscan":
+            if HYPERSCAN_TOGGLE:
+                HYPERSCAN_TOGGLE = False
+                print("hyperscan mode is now OFF.")
+            else:
+                HYPERSCAN_TOGGLE = True
+                print("hyperscan mode is now ON!!")
+            _inputline = ""
+            print "   * * *"
+            continue
+
+        UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
+        if _inputline == "undo":
+            if len(barcodes) > 0:
+                _undo_confirm = raw_input("{} will be removed from the queue. (y/Y) to confirm:".format(barcodes[-1]))
+                if _undo_confirm.lower() == "y":
+                    print("{} removed from queue.".format(barcodes.pop()))
+                else:
+                    print("Undo cancelled.")
+            else:
+                print "Nothing to undo!"
+            _inputline = ""
+            print "   * * *"
+            continue
+
         # capture 'quit'
         if _inputline == "quit":
             continue
@@ -74,8 +104,13 @@ if __name__ == "__main__":
         print "   * * *"
         print "Barcode has {} numbers.".format(len(_inputline))
 
-        _accept_inputline = raw_input("Accept barcode? (press enter, any key to discard):")
-        if _accept_inputline.lower() == "":
+        if HYPERSCAN_TOGGLE == False:
+            _accept_inputline = raw_input("Accept barcode? (press enter, any key to discard):")
+        else:
+            # skip confirmation if hyperscan is on/True
+            _accept_inputline = ""
+
+        if _accept_inputline == "":
             barcodes.append(_inputline)
             print "Barcode: STORED. There are now {} unsaved barcodes.".format(len(barcodes))
             print "   * * *"
