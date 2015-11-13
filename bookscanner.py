@@ -51,9 +51,12 @@ if __name__ == "__main__":
 
     SAVE_STATEMENT = "Type 'save' to save and continue.\n"
     DUMP_STATEMENT = "Type 'dump' to see the barcodes ready to be saved\n"
+    HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode."
+    UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
     INSTRUCTION_STATEMENT = "Please scan the next book:"
     INPUT_STATEMENT = SAVE_STATEMENT + DUMP_STATEMENT + \
+                        HYPERSCAN_STATEMENT + UNDO_STATEMENT + \
                         QUIT_STATEMENT + INSTRUCTION_STATEMENT
 
 
@@ -68,7 +71,6 @@ if __name__ == "__main__":
             print "   * * *"
             continue
 
-        HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode."
         if _inputline == "hyperscan":
             if HYPERSCAN_TOGGLE:
                 HYPERSCAN_TOGGLE = False
@@ -80,7 +82,6 @@ if __name__ == "__main__":
             print "   * * *"
             continue
 
-        UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
         if _inputline == "undo":
             if len(barcodes) > 0:
                 _undo_confirm = raw_input("{} will be removed from the queue. (y/Y) to confirm:".format(barcodes[-1]))
