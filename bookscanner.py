@@ -50,12 +50,12 @@ if __name__ == "__main__":
     print "   * * *"
 
     SAVE_STATEMENT = "Type 'save' to save and continue.\n"
-    DUMP_STATEMENT = "Type 'dump' to see the barcodes ready to be saved\n"
+    SHOW_STATEMENT = "Type 'show' to see the barcodes ready to be saved\n"
     HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode.\n"
     UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
     INSTRUCTION_STATEMENT = "Please scan the next book:"
-    INPUT_STATEMENT = SAVE_STATEMENT + DUMP_STATEMENT + \
+    INPUT_STATEMENT = SAVE_STATEMENT + SHOW_STATEMENT + \
                         HYPERSCAN_STATEMENT + UNDO_STATEMENT + \
                         QUIT_STATEMENT + INSTRUCTION_STATEMENT
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         # capture 'quit'
         if _inputline == "quit":
             continue
-        if _inputline == "dump":
+        if _inputline == "show":
             print "Current barcodes NOT YET SAVED:"
             pprint.pprint(barcodes)
             _inputline = ""
