@@ -16,7 +16,7 @@ The barcode scanner script DOES:
 
 The barcode scanner script does NOT:
 ================================
-- Teach you about how book barcodes work
+- Teach you how barcodes work (some notes on this are below)
 - Find errors
 - Fix errors
 
