@@ -83,28 +83,33 @@ if __name__ == "__main__":
     UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     HELP_STATEMENT = "Type 'help' to see this help.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
-    WHY_PAGES = "There is a page # to help the human eye track changes."
 
-    INSTRUCTION_STATEMENT = "Please scan the NEXT BOOK:"
+    INSTRUCTION_STATEMENT = "Scan NEXT BOOK:"
 
 
     COMMAND_INFORMATION = construct_statement(SAVE_STATEMENT, 
             SHOW_STATEMENT, HYPERSCAN_STATEMENT, UNDO_STATEMENT, 
-            HELP_STATEMENT, QUIT_STATEMENT + WHY_PAGES)
+            HELP_STATEMENT, QUIT_STATEMENT)
 
     INPUT_STATEMENT = construct_statement(INSTRUCTION_STATEMENT)
 
-
-    print
-    print "Please SAVE your work OFTEN, there is no error handling."
+    # lead with pagination
     print numbered_spacer()
-
 
     barcodes = list()
     _inputline = "" # sentinel value (no do while in python)
-    while _inputline != "quit":
+    while True:
 
         _inputline = raw_input(INPUT_STATEMENT)
+        print
+
+        if _inputline == "quit":
+            if len(barcodes) > 0:
+                print "You cannot quit unless there are no items in the queue."
+                print "Type show to see your queue, type undo to remove items"
+                print "Use ctrl+c to quit anyways."
+            else:
+                break
 
         # capture empty values, for good UX
         if _inputline == "":
@@ -159,8 +164,7 @@ if __name__ == "__main__":
             _inputline = ""
             continue
 
-        print
-        print "Barcode has {} numbers.".format(len(_inputline))
+        print "INFO: The scan has {} numbers.".format(len(_inputline))
         print
 
         if HYPERSCAN_TOGGLE == False:
