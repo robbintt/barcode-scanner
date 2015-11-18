@@ -11,19 +11,38 @@ import pprint
 OUTPUT_DIR = "data"
 SQLITE_FILE = "barcodes.sqlite"
 
+
+def construct_input_statement(*args):
+    """ dead simple statement to keep control flow clean.
+
+    This is broken out so that more interesting things
+    can be done with the 'standard information' given to
+    the user in the future.
+
+    One such idea is to hide some commands unless a 'help'
+    command is performed. Or something.
+    """
+
+    INPUT_STATEMENT = ""
+    for statement in args:
+        INPUT_STATEMENT += statement
+        
+
+    return INPUT_STATEMENT
+
 # toggle this in-console, not here. hyperscan turns off barcode confirmations.
 HYPERSCAN_TOGGLE = False
 
 def sqlite_save(barcodes):
-    """ Accept a list of barcodes and dump it to an output file.
+    """ Accept a list of barcodes and dump it to the sqlite database.
     """
 
-    # quick and dirty edge case
+    # quick and dirty - don't save if there is no data.
     if not len(barcodes):
         # skip this if there are no barcodes
         return "No data to save... continue..."
 
-
+    # reformat each list item to a tuple for sqlite3 executemany
     barcode_tuples = [(x,) for x in barcodes]
 
     db_file = os.path.join(OUTPUT_DIR, SQLITE_FILE)
@@ -43,21 +62,25 @@ if __name__ == "__main__":
     """Save barcodes in to sqlite.
 
     Goal of this module is to provide some good UX doing this.
+
+    Commands all follow the same template. This could be easily
+    refactored but the original purpose of this code is one-time use.
     """
-
-    print "   * * *"
-    print "Please SAVE your work OFTEN, there is no error handling."
-    print "   * * *"
-
     SAVE_STATEMENT = "Type 'save' to save and continue.\n"
     SHOW_STATEMENT = "Type 'show' to see the barcodes ready to be saved\n"
     HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode.\n"
     UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
     INSTRUCTION_STATEMENT = "Please scan the next book:"
-    INPUT_STATEMENT = SAVE_STATEMENT + SHOW_STATEMENT + \
-                        HYPERSCAN_STATEMENT + UNDO_STATEMENT + \
-                        QUIT_STATEMENT + INSTRUCTION_STATEMENT
+
+    INPUT_STATEMENT = construct_input_statement(SAVE_STATEMENT, 
+            SHOW_STATEMENT, HYPERSCAN_STATEMENT, UNDO_STATEMENT, 
+            QUIT_STATEMENT, INSTRUCTION_STATEMENT)
+
+
+    print "   * * *"
+    print "Please SAVE your work OFTEN, there is no error handling."
+    print "   * * *"
 
 
     barcodes = list()
