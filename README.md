@@ -32,16 +32,22 @@ Steps:
 7. Use the 'quit command to quit.
 
 
+Warnings:
+=========
+- Some books have a sticker barcode, don't scan this. We can't trust it! Enter the barcode manually instead. The sticker barcode could be anything.
+- Some books don't have a barcode and need manually entered. You can find the ISBN inside the front of the book on the left-side page soon after the title page.
+- Some books do not have an ISBN at all. Put these in the grey bin, they can be manually added once we have a full book database.
+
+
 Important:
 ==========
-- WARNING: Some books have a sticker barcode. Don't scan this, enter the barcode manually instead. The sticker barcode could be anything, we can't trust it!
-- You may manually enter a barcode and then press enter to submit it. You will still need to verify the value by pressing enter again.
+- You may manually enter a barcode and press enter to submit it. You will still need to verify the value by pressing enter again.
 - Make sure to save before you quit.
-- Some books don't have a barcode. These need manually entered. You can find this information inside the front of the book, usually on the left hand page soon after the title page.
 
 
 Commands:
 =========
+- help - show the help (these commands)
 - save - save and continue
 - show - see the barcodes in your queue
 - hyperscan - enter fast mode (no confirmations required)
