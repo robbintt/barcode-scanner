@@ -4,7 +4,7 @@ Barcode Scanner User Guide:
 
 **DISCLAIMER:** This is a simple interface, it requires patience and slowness.
 
-#### Please read everything as you scan and verify each entry.
+#### Please read all text as you scan. Verify that each entry 'looks right'.
 
 
 The barcode scanner script DOES:
