@@ -1,21 +1,24 @@
 
-### Barcode Scanner User Guide:
+Barcode Scanner User Guide:
+===============================
 
-DISCLAIMER: This script is a simple interface, it requires patience and slowness.
+**DISCLAIMER:** This script is a simple interface, it requires patience and slowness.
+
+#### Please read everything as you scan and verify each entry.
 
 
 The barcode scanner script DOES:
 ================================
-Show you the barcodes you scanned.
-Allow you to undo errors.
-Add your barcodes to a database when you 'save' them.
+- Show you the barcodes you scanned.
+- Allow you to undo errors.
+- Add your barcodes to a database (once you 'save' them).
 
 
 The barcode scanner script does NOT:
 ================================
-Teach you about how book barcodes work
-Find errors
-Fix errors
+- Teach you about how book barcodes work
+- Find errors
+- Fix errors
 
 
 Steps:
@@ -31,11 +34,11 @@ Steps:
 
 Commands:
 =========
-save - save and continue
-show - see the barcodes in your queue
-hyperscan - enter fast mode (no confirmations required)
-undo - delete the last entry in your queue
-quit - exit/quit WITHOUT saving
+- save - save and continue
+- show - see the barcodes in your queue
+- hyperscan - enter fast mode (no confirmations required)
+- undo - delete the last entry in your queue
+- quit - exit/quit **WITHOUT** saving
 
 
 Information you might want:
@@ -49,7 +52,7 @@ Information you might want:
 Even more information, important but less urgent:
 =================================================
 - We are collecting barcodes. Sometimes those are ISBNs, we'll sort it out later.
-- The barcode is an EIN, and is the ISBN for *many* books.
+- The barcode is an EIN, and is the ISBN for **many** books.
 - Some barcodes are 12 digits. They seem to have a 10 digit ISBN. Why?
 - Before modern day: many standards.
 - Modern day: The EAN is a 13 digit number. It must begin with 978 or 979 if it refers to an ISBN.
