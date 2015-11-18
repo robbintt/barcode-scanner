@@ -25,9 +25,9 @@ Steps:
 ======
 1. Right click on 'bookscanner.py' and choose Open With --> "Terminal Emulator"
 2. Scan your first book at the prompt.
-3. Press ENTER to store the code in your queue. The code is not yet saved.
+3. Press ENTER to store the barcode in your queue. The barcode is not yet saved.
 4. Repeat 3 and 4 for a small stack of books.
-5. When you are ready to commit your codes, type 'save' (without the quotes).
+5. When you are ready to commit your barcodes, type 'save' (without the quotes).
 6. At this point there should be '0 unsaved barcodes'.
 7. Use the 'quit command to quit.
 
