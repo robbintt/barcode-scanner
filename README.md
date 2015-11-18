@@ -45,6 +45,10 @@ Important:
 - Make sure to save before you quit.
 - Use the 'help' command to see all available commands.
 
+Useful Checks:
+==============
+1. Does the number of barcodes in your dump match the number of books you scanned?
+
 
 Commands:
 =========
