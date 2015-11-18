@@ -14,7 +14,9 @@ SQLITE_FILE = "barcodes.sqlite"
 PAGE_NUMBER = 0
 SPACER = " " * 40 # can use any character, empty seems to be best
 
-def numbered_spacer():
+def pagination_spacer():
+    """ A spacer that gives information about the current command 'page'
+    """
     global PAGE_NUMBER
     PAGE_NUMBER += 1
     pagination =  "-{} (Page # {})".format(SPACER, str(PAGE_NUMBER))
@@ -22,6 +24,7 @@ def numbered_spacer():
     pagination += " {} type 'help' for commands".format(SPACER,)
 
     return pagination
+
 
 def construct_statement(*args):
     """ dead simple statement to keep control flow clean.
@@ -96,7 +99,7 @@ if __name__ == "__main__":
     barcodes = list()
 
     while True:
-        print numbered_spacer()
+        print pagination_spacer()
 
         _inputline = raw_input(INPUT_STATEMENT)
         print
