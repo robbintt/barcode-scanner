@@ -11,6 +11,13 @@ import pprint
 OUTPUT_DIR = "data"
 SQLITE_FILE = "barcodes.sqlite"
 
+LINE_NUMBER = 0
+SPACER = " " * 40 # can use any character, empty seems to be best
+
+def numbered_spacer():
+    global LINE_NUMBER
+    LINE_NUMBER += 1
+    return "-{} (Page # {})".format(SPACER, str(LINE_NUMBER))
 
 def construct_input_statement(*args):
     """ dead simple statement to keep control flow clean.
@@ -71,16 +78,16 @@ if __name__ == "__main__":
     HYPERSCAN_STATEMENT = "Type 'hyperscan' to enter fast mode.\n"
     UNDO_STATEMENT = "Type 'undo' to undo the last entry.\n"
     QUIT_STATEMENT = "Type 'quit' to exit.\n"
-    INSTRUCTION_STATEMENT = "Please scan the next book:"
+    INSTRUCTION_STATEMENT = "Please scan the NEXT BOOK:"
 
     INPUT_STATEMENT = construct_input_statement(SAVE_STATEMENT, 
             SHOW_STATEMENT, HYPERSCAN_STATEMENT, UNDO_STATEMENT, 
             QUIT_STATEMENT, INSTRUCTION_STATEMENT)
 
 
-    print "   * * *"
+    print numbered_spacer()
     print "Please SAVE your work OFTEN, there is no error handling."
-    print "   * * *"
+    print numbered_spacer()
 
 
     barcodes = list()
@@ -91,7 +98,7 @@ if __name__ == "__main__":
 
         # capture empty values, for good UX
         if _inputline == "":
-            print "   * * *"
+            print numbered_spacer()
             continue
 
         if _inputline == "hyperscan":
@@ -102,7 +109,7 @@ if __name__ == "__main__":
                 HYPERSCAN_TOGGLE = True
                 print("hyperscan mode is now ON!!")
             _inputline = ""
-            print "   * * *"
+            print numbered_spacer()
             continue
 
         if _inputline == "undo":
@@ -115,40 +122,47 @@ if __name__ == "__main__":
             else:
                 print "Nothing to undo!"
             _inputline = ""
-            print "   * * *"
+            print numbered_spacer()
             continue
 
         # capture 'quit'
         if _inputline == "quit":
             continue
         if _inputline == "show":
+            print numbered_spacer()
             print "Current barcodes NOT YET SAVED:"
-            pprint.pprint(barcodes)
+            for barcode in barcodes:
+                print barcode
+            print numbered_spacer()
             _inputline = ""
             continue
         if _inputline == "save":
-            print "   * * *"
             print sqlite_save(barcodes)
             barcodes = list() # start fresh
+            print numbered_spacer()
             print "There are now {} unsaved barcodes.".format(len(barcodes))
-            print "   * * *"
+            print numbered_spacer()
             _inputline = ""
             continue
 
-        print "   * * *"
-        print "   * * *"
+        print numbered_spacer()
+        print
         print "Barcode has {} numbers.".format(len(_inputline))
+        print
 
         if HYPERSCAN_TOGGLE == False:
-            _accept_inputline = raw_input("Accept barcode? (press enter, any nonempty value to discard):")
+            print "accept: Press ENTER.  |  discard: type anything THEN press enter."
+            _accept_inputline = raw_input("ACCEPT scan?")
         else:
             # skip confirmation if hyperscan is on/True
             _accept_inputline = ""
 
         if _accept_inputline == "":
             barcodes.append(_inputline)
-            print "Barcode: STORED. There are now {} unsaved barcodes.".format(len(barcodes))
-            print "   * * *"
+            print numbered_spacer()
+            print "Barcode: STORED."
+            print "There are now {} unsaved barcodes.".format(len(barcodes))
+            print numbered_spacer()
         else:
             print "\a"
             print "Barcode: DISCARDED DISCARDED DISCARDED."
@@ -159,5 +173,5 @@ if __name__ == "__main__":
             print "\a"
             print "Discard cooldown. 1 second remaining."
             time.sleep(1)
-            print "   * * *"
+            print numbered_spacer()
 
