@@ -2,7 +2,7 @@
 Barcode Scanner User Guide:
 ===============================
 
-**DISCLAIMER:** This script is a simple interface, it requires patience and slowness.
+**DISCLAIMER:** This is a simple interface, it requires patience and slowness.
 
 #### Please read everything as you scan and verify each entry.
 
@@ -32,6 +32,14 @@ Steps:
 7. Use the 'quit command to quit.
 
 
+Important:
+==========
+- You may manually enter a barcode and then press enter to submit it. You will still need to verify the value by pressing enter again.
+- Make sure to save before you quit.
+- Some books don't have a barcode. These need manually entered. You can find this information inside the front of the book, usually on the left hand page soon after the title page.
+- Some books have a sticker barcode. Don't scan this, enter the barcode manually instead. The sticker barcode could be anything, we can't trust it!
+
+
 Commands:
 =========
 - save - save and continue
@@ -41,16 +49,8 @@ Commands:
 - quit - exit/quit **WITHOUT** saving
 
 
-Information you might want:
-===========================
-- You may manually enter a barcode and then press enter to submit it. You will still need to verify the value by pressing enter again.
-- Make sure to save before you quit.
-- Some books don't have a barcode. These need manually entered. You can find this information inside the front of the book, usually on the left hand page soon after the title page.
-- Some books have a sticker barcode. Don't scan this, enter the barcode manually instead. The sticker barcode could be anything, we can't trust it!
-
-
-Even more information, important but less urgent:
-=================================================
+Notes:
+======
 - We are collecting barcodes. Sometimes those are ISBNs, we'll sort it out later.
 - The barcode is an EIN, and is the ISBN for **many** books.
 - Some barcodes are 12 digits. They seem to have a 10 digit ISBN. Why?
