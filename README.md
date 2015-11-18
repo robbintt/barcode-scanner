@@ -29,7 +29,7 @@ Steps:
 4. Repeat 3 and 4 for a small stack of books.
 5. When you are ready to commit your barcodes, type 'save' (without the quotes).
 6. At this point there should be '0 unsaved barcodes'.
-7. Use the 'quit command to quit.
+7. Use the 'quit' command to quit. Use the 'help' command to see all commands.
 
 
 Warnings:
