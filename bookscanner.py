@@ -92,16 +92,15 @@ if __name__ == "__main__":
             HELP_STATEMENT, QUIT_STATEMENT)
 
     INPUT_STATEMENT = construct_statement(INSTRUCTION_STATEMENT)
-
-    # lead with pagination
-    print numbered_spacer()
-
+    
     barcodes = list()
-    _inputline = "" # sentinel value (no do while in python)
+
     while True:
+        print numbered_spacer()
 
         _inputline = raw_input(INPUT_STATEMENT)
         print
+
 
         if _inputline == "quit":
             if len(barcodes) > 0:
@@ -111,15 +110,14 @@ if __name__ == "__main__":
             else:
                 break
 
+            continue
+
         # capture empty values, for good UX
         if _inputline == "":
-            print numbered_spacer()
             continue
 
         if _inputline == "help":
             print COMMAND_INFORMATION
-            print numbered_spacer()
-            _inputline == ""
             continue
 
         if _inputline == "hyperscan":
@@ -129,8 +127,6 @@ if __name__ == "__main__":
             else:
                 HYPERSCAN_TOGGLE = True
                 print("hyperscan mode is now ON!!")
-            _inputline = ""
-            print numbered_spacer()
             continue
 
         if _inputline == "undo":
@@ -142,27 +138,21 @@ if __name__ == "__main__":
                     print("Undo cancelled.")
             else:
                 print "Nothing to undo!"
-            _inputline = ""
-            print numbered_spacer()
             continue
 
-        # capture 'quit'
-        if _inputline == "quit":
-            continue
         if _inputline == "show":
             print "Current barcodes NOT YET SAVED:"
             for barcode in barcodes:
                 print barcode
-            _inputline = ""
-            print numbered_spacer()
             continue
+
         if _inputline == "save":
             print sqlite_save(barcodes)
             barcodes = list() # start fresh
             print "There are now {} unsaved barcodes.".format(len(barcodes))
-            print numbered_spacer()
-            _inputline = ""
             continue
+
+        # manage non-command input as a barcode:
 
         print "INFO: The scan has {} numbers.".format(len(_inputline))
         print
@@ -179,7 +169,6 @@ if __name__ == "__main__":
             barcodes.append(_inputline)
             print "Barcode: STORED."
             print "There are now {} unsaved barcodes.".format(len(barcodes))
-            print numbered_spacer()
         else:
             print "\a"
             print "Barcode: DISCARDED DISCARDED DISCARDED."
@@ -190,5 +179,4 @@ if __name__ == "__main__":
             print "\a"
             print "Discard cooldown. 1 second remaining."
             time.sleep(1)
-            print numbered_spacer()
 
