@@ -10,13 +10,14 @@ import pprint
 
 OUTPUT_DIR = "data"
 SQLITE_FILE = "barcodes.sqlite"
+db_file = os.path.join(OUTPUT_DIR, SQLITE_FILE)
 
 PAGE_NUMBER = 0
 SPACER = " " * 40 # can use any character, empty seems to be best
 
 # toggle this in-console, not here. hyperscan True turns off barcode confirmations.
+# true by default, in practice it is tough to remember to verify each scan with a keypress.
 HYPERSCAN_TOGGLE = True
-
 
 def pagination_spacer():
     """ A spacer that gives information about the current command 'page'
@@ -60,17 +61,18 @@ def sqlite_save(barcodes):
     # reformat each list item to a tuple for sqlite3 executemany
     barcode_tuples = [(x,) for x in barcodes]
 
-    db_file = os.path.join(OUTPUT_DIR, SQLITE_FILE)
-
     conn = sqlite3.connect(db_file)
     c = conn.cursor()
 
     c.executemany("INSERT INTO barcode VALUES (?)", barcode_tuples)
 
+    c.execute("SELECT COUNT(*) FROM barcode")
+    BOOK_COUNT = c.fetchall()
+
     conn.commit()
     conn.close()
     
-    return "Save seemed successful."
+    return "Save seemed successful. {} total books have been entered.".format(BOOK_COUNT[0][0],)
 
 
 if __name__ == "__main__":
