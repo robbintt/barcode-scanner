@@ -14,6 +14,10 @@ SQLITE_FILE = "barcodes.sqlite"
 PAGE_NUMBER = 0
 SPACER = " " * 40 # can use any character, empty seems to be best
 
+# toggle this in-console, not here. hyperscan True turns off barcode confirmations.
+HYPERSCAN_TOGGLE = True
+
+
 def pagination_spacer():
     """ A spacer that gives information about the current command 'page'
     """
@@ -43,9 +47,6 @@ def construct_statement(*args):
         
 
     return INPUT_STATEMENT
-
-# toggle this in-console, not here. hyperscan turns off barcode confirmations.
-HYPERSCAN_TOGGLE = False
 
 def sqlite_save(barcodes):
     """ Accept a list of barcodes and dump it to the sqlite database.
