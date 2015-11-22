@@ -37,6 +37,8 @@ Warnings:
 - Some books have a sticker barcode, don't scan this. We can't trust it! Enter the barcode manually instead. The sticker barcode could be anything.
 - Some books don't have a barcode and need manually entered. You can find the ISBN inside the front of the book on the left-side page soon after the title page.
 - Some books do not have an ISBN at all. Put these in the grey bin, they can be manually added once we have a full book database.
+- A 10-digit ISBN can have an X as the last character, only.
+- Enter only numbers, do not enter dashes. Don't worry if you accidentally entered dashes, we can fix it later.
 
 
 Important:
